@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
-import { UserModel } from "../models/User"; // Import the User model
+import UserModel from "../models/User";
 
 // Create a new user
 export const createUser = async (req: Request, res: Response) => {
-  // Create a new user using the UserModel and request body data
   try {
     const newUser = await UserModel.create(req.body);
     res.status(201).json(newUser);

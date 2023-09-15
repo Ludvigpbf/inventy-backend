@@ -1,15 +1,24 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema, Model, Types } from "mongoose";
 
-// Make a List interface
-const ListSchema = new mongoose.Schema({
+interface IList extends Document {
+  listTitle: string;
+  listDescription?: string;
+  listImage?: Types.ObjectId;
+  listSections?: {
+    listSection: Types.ObjectId;
+  }[];
+  listItems?: {
+    listItem: Types.ObjectId;
+  }[];
+}
+
+const ListSchema = new Schema<IList>({
   listTitle: { type: String, required: true, unique: true },
   listDescription: { type: String },
-  /* listImage: {
+  listImage: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Image",
-    default:
-      "https://media.istockphoto.com/id/1399859917/sv/vektor/no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment-placeholder.jpg?s=170667a&w=0&k=20&c=rxXk8ukIZzceaHA5ohwXPvFOEy-ncyNY8fipuX10ZmU=",
-  }, */
+  },
   listSections: [
     {
       listSection: { type: mongoose.Schema.Types.ObjectId, ref: "Section" },
@@ -22,4 +31,6 @@ const ListSchema = new mongoose.Schema({
   ],
 });
 
-export const ListModel = mongoose.model("List", ListSchema);
+const ListModel: Model<IList> = mongoose.model<IList>("List", ListSchema);
+
+export default ListModel;

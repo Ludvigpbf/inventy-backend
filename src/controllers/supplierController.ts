@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { SupplierModel } from "../models/Supplier";
+import SupplierModel from "../models/Supplier";
 
 // Create a new Supplier
 export const createSupplier = async (req: Request, res: Response) => {

@@ -8,6 +8,8 @@ import listRouter from "./routes/listRoutes";
 import itemRouter from "./routes/itemRoutes";
 import supplierRouter from "./routes/supplierRoutes";
 import sectionRouter from "./routes/sectionRoutes";
+import imageRouter from "./routes/imageRoutes";
+import periodRouter from "./routes/periodRoutes";
 
 // Create an Express application
 const app = express();
@@ -48,6 +50,8 @@ app.use("/list", listRouter);
 app.use("/item", itemRouter);
 app.use("/supplier", supplierRouter);
 app.use("/section", sectionRouter);
+app.use("/image", imageRouter);
+app.use("/period", periodRouter);
 
 // Error handling middleware (place it after your routes)
 app.use(

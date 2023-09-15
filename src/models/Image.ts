@@ -1,9 +1,17 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema, Model, Types } from "mongoose";
 
-const ImageSchema = new mongoose.Schema({
-  title: { type: String },
-  description: { type: String },
-  path: { type: String, required: true },
+interface IImage extends Document {
+  imageTitle?: string;
+  imageDescription?: string;
+  imagePath: string;
+}
+
+const ImageSchema = new Schema<IImage>({
+  imageTitle: { type: String },
+  imageDescription: { type: String },
+  imagePath: { type: String },
 });
 
-export const ImageModel = mongoose.model("Image", ImageSchema);
+const ImageModel: Model<IImage> = mongoose.model("Image", ImageSchema);
+
+export default ImageModel;

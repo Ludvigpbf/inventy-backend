@@ -1,8 +1,25 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema, Model, Types } from "mongoose";
 import bcrypt from "bcrypt";
 
-// Make a User interface
-const UserSchema = new mongoose.Schema({
+interface IUser extends Document {
+  company: string;
+  email: string;
+  password: string;
+  plan: string;
+  billing: {
+    company: string;
+    orgNumber: string;
+    adress: string;
+    email: string;
+    phone: number;
+  };
+  departments: {
+    department: string;
+    manager: string;
+  }[];
+}
+
+const UserSchema = new Schema<IUser>({
   company: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: {
@@ -46,4 +63,6 @@ UserSchema.pre("save", async function (next) {
   }
 });
 
-export const UserModel = mongoose.model("User", UserSchema);
+const UserModel: Model<IUser> = mongoose.model<IUser>("User", UserSchema);
+
+export default UserModel;

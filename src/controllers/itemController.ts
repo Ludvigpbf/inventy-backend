@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ItemModel } from "../models/Item";
+import ItemModel from "../models/Item";
 
 // Create a new Item
 export const createItem = async (req: Request, res: Response) => {

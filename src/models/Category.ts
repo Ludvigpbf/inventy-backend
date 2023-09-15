@@ -1,9 +1,17 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema, Model, Types } from "mongoose";
 
-// Make a Category interface
-const CategorySchema = new mongoose.Schema({
-  categoryTitle: { type: String, required: true, unique: true },
-  section: { type: mongoose.Schema.Types.ObjectId, ref: "Section" },
+interface ICategory extends Document {
+  categoryId: number;
+  categoryTitle?: string;
+}
+
+const CategorySchema = new Schema<ICategory>({
+  categoryId: { type: Number, unique: true },
+  categoryTitle: { type: String, unique: true },
 });
+const CategoryModel: Model<ICategory> = mongoose.model<ICategory>(
+  "Category",
+  CategorySchema
+);
 
-export const CategoryModel = mongoose.model("Category", CategorySchema);
+export default CategoryModel;

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ListModel } from "../models/List"; // Import the List model
+import ListModel from "../models/List"; // Import the List model
 
 // Create a new list
 export const createList = async (req: Request, res: Response) => {

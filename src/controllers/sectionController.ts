@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { SectionModel } from "../models/Section";
+import SectionModel from "../models/Section";
 
 // Create a new Section
 export const createSection = async (req: Request, res: Response) => {

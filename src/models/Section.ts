@@ -1,14 +1,22 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema, Model, Types } from "mongoose";
 
-const SectionSchema = new mongoose.Schema({
+interface ISection extends Document {
+  sectionTitle: string;
+  sectionDescription: string;
+  sectionImage: Types.ObjectId;
+  sectionItems: {
+    sectionItem: Types.ObjectId;
+  }[];
+}
+const SectionSchema = new Schema<ISection>({
   sectionTitle: { type: String, required: true, unique: true },
   sectionDescription: { type: String },
-  /*  sectionImage: {
+  sectionImage: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Image",
     default:
       "https://media.istockphoto.com/id/1399859917/sv/vektor/no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment-placeholder.jpg?s=170667a&w=0&k=20&c=rxXk8ukIZzceaHA5ohwXPvFOEy-ncyNY8fipuX10ZmU=",
-  }, */
+  },
   sectionItems: [
     {
       sectionItem: { type: mongoose.Schema.Types.ObjectId, ref: "Item" },
@@ -17,4 +25,9 @@ const SectionSchema = new mongoose.Schema({
   ],
 });
 
-export const SectionModel = mongoose.model("Section", SectionSchema);
+const SectionModel: Model<ISection> = mongoose.model<ISection>(
+  "Section",
+  SectionSchema
+);
+
+export default SectionModel;

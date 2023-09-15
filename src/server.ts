@@ -1,8 +1,13 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "./db";
+import multer from "multer";
 
 import userRouter from "./routes/userRoutes";
+import listRouter from "./routes/listRoutes";
+import itemRouter from "./routes/itemRoutes";
+import supplierRouter from "./routes/supplierRoutes";
+import sectionRouter from "./routes/sectionRoutes";
 
 // Create an Express application
 const app = express();
@@ -15,6 +20,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 const port = 3000;
 
+// Define storage for Multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    // Specify the destination folder where uploaded files will be stored
+    cb(null, "./uploads/"); // You should create this "uploads" folder
+  },
+  filename: (req, file, cb) => {
+    // Set the file name for the uploaded file
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+// Create a Multer instance with the storage configuration
+const upload = multer({ storage });
+
 // Use the database connection in here
 mongoose;
 
@@ -24,6 +44,10 @@ app.listen(port, () => {
 
 // Define your routes
 app.use("/auth", userRouter);
+app.use("/list", listRouter);
+app.use("/item", itemRouter);
+app.use("/supplier", supplierRouter);
+app.use("/section", sectionRouter);
 
 // Error handling middleware (place it after your routes)
 app.use(

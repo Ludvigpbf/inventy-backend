@@ -19,6 +19,6 @@ periodRouter.get("/supplier/:id", getPeriodById);
 // periodRouter.get("/period/:periodTitle", getPeriodByPeriodTitle);
 periodRouter.put("/period/:id", updatePeriodById);
 periodRouter.delete("/period/:id", deletePeriodById);
-periodRouter.delete("/periods/:ids", deletePeriodsByIds);
+periodRouter.delete("/periods/delete", deletePeriodsByIds);
 
 export default periodRouter;

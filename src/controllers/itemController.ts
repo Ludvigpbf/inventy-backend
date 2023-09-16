@@ -106,3 +106,5 @@ export const deleteItemById = async (req: Request, res: Response) => {
     res.status(500).json({ error: (error as Error).message });
   }
 };
+
+// insertMany, deleteMany, copyOne, copyMany

@@ -98,7 +98,9 @@ export const deletePeriodById = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Period not found" });
     }
 
-    res.json(period);
+    res.json({
+      message: `${period.periodTitle} deleted successfully`,
+    });
   } catch (error) {
     res.status(500).json({ error: (error as Error).message });
   }

@@ -36,7 +36,7 @@ export const getSupplierById = async (req: Request, res: Response) => {
   }
 };
 
-// Read a single supplier by supplierTitle
+// Read a single supplier by supplierName
 export const getSupplierBySupplierName = async (
   req: Request,
   res: Response

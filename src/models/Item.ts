@@ -5,7 +5,7 @@ interface IItem extends Document {
   itemTitle: string;
   itemDescription?: string;
   itemImage?: Types.ObjectId;
-  itemCategory?: {Types.ObjectId | null}[];
+  itemCategory?: (Types.ObjectId | null)[];
   itemSupplier?: Types.ObjectId | null;
   itemQuantity: number;
   itemUnit: string;
@@ -21,11 +21,13 @@ const ItemSchema = new Schema<IItem>({
     ref: "Image",
     default: "65041c500dbdfa80c85e3a66",
   },
-  itemCategory: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
-    default: null,
-  }],
+  itemCategory: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      default: null,
+    },
+  ],
   itemSupplier: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Supplier",

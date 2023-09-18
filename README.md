@@ -18,3 +18,11 @@
   
 
 // section
+  "sectionTitle": "",
+  "sectionDescription": "",
+  "sectionImage": ""
+  "sectionItems": {
+  "sectionItem": "",
+  }[],
+
+

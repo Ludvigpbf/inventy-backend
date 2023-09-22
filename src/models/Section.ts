@@ -7,6 +7,7 @@ interface ISection extends Document {
   sectionItems: {
     sectionItem: Types.ObjectId;
   }[];
+  ownedBy: Types.ObjectId;
 }
 const SectionSchema = new Schema<ISection>({
   sectionTitle: { type: String, required: true, unique: true },
@@ -23,6 +24,11 @@ const SectionSchema = new Schema<ISection>({
       _id: false,
     },
   ],
+  ownedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 const SectionModel: Model<ISection> = mongoose.model<ISection>(

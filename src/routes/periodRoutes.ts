@@ -11,7 +11,6 @@ import {
 
 const periodRouter = express.Router();
 
-// Update the routes to your routes
 periodRouter.post("/period", createPeriod);
 periodRouter.get("/periods", getAllPeriods);
 periodRouter.get("/supplier/:id", getPeriodById);

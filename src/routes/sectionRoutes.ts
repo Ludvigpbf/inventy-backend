@@ -10,7 +10,6 @@ import {
 
 const sectionRouter = express.Router();
 
-// Update the routes to your routes
 sectionRouter.post("/section", createSection);
 sectionRouter.get("/sections", getAllSections);
 sectionRouter.get("/section/:id", getSectionById);

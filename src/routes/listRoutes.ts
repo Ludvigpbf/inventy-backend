@@ -10,7 +10,6 @@ import {
 
 const listRouter = express.Router();
 
-// Update the routes to your routes
 listRouter.post("/list", createList);
 listRouter.get("/lists", getAllLists);
 listRouter.get("/list/:id", getListById);

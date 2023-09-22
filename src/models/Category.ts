@@ -1,15 +1,20 @@
 import mongoose, { Document, Schema, Model, Types } from "mongoose";
 
 interface ICategory extends Document {
-  categoryId: number;
   categoryTitle?: string;
+  ownedBy: Types.ObjectId;
 }
 
 const CategorySchema = new Schema<ICategory>({
-  categoryId: { type: Number, unique: true },
   categoryTitle: { type: String, unique: true },
+  ownedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
-const CategoryModel: Model<ICategory> = mongoose.model<ICategory>(
+
+const CategoryModel: Model<ICategory> = mongoose.model(
   "Category",
   CategorySchema
 );

@@ -10,7 +10,6 @@ import {
 
 const itemRouter = express.Router();
 
-// Update the routes to your routes
 itemRouter.post("/item", createItem);
 itemRouter.get("/items", getAllItems);
 itemRouter.get("/item/:id", getItemById);

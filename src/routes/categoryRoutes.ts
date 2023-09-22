@@ -10,7 +10,6 @@ import {
 
 const categoryRouter = express.Router();
 
-// Update the routes to your routes
 categoryRouter.post("/category", createCategory);
 categoryRouter.get("/categorys", getAllCategorys);
 categoryRouter.get("/category/:id", getCategoryById);

@@ -6,15 +6,14 @@ interface IPeriod extends Document {
   periodDescription?: string;
   periodTotalItems: number;
   periodTotalAmount: number;
+  ownedBy: Types.ObjectId;
 }
 
-// Function to get the first day of the current month (date only)
 function getFirstDayOfCurrentMonth(): Date {
   const currentDate = new Date();
   return new Date(currentDate.getFullYear(), currentDate.getMonth(), 2);
 }
 
-// Function to get the last day of the current month (date only)
 function getLastDayOfCurrentMonth(): Date {
   const currentDate = new Date();
   return new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
@@ -29,6 +28,11 @@ const PeriodSchema = new Schema<IPeriod>({
   periodDescription: { type: String },
   periodTotalItems: { type: Number, required: true },
   periodTotalAmount: { type: Number, required: true },
+  ownedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 const PeriodModel: Model<IPeriod> = mongoose.model<IPeriod>(

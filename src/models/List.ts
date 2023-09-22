@@ -10,6 +10,7 @@ interface IList extends Document {
   listItems?: {
     listItem: Types.ObjectId;
   }[];
+  ownedBy: Types.ObjectId;
 }
 
 const ListSchema = new Schema<IList>({
@@ -29,6 +30,11 @@ const ListSchema = new Schema<IList>({
       listItem: { type: mongoose.Schema.Types.ObjectId, ref: "Item" },
     },
   ],
+  ownedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 const ListModel: Model<IList> = mongoose.model<IList>("List", ListSchema);

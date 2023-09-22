@@ -10,6 +10,7 @@ interface IItem extends Document {
   itemQuantity: number;
   itemUnit: string;
   itemPrice: number;
+  ownedBy: Types.ObjectId;
 }
 
 const ItemSchema = new Schema<IItem>({
@@ -36,6 +37,11 @@ const ItemSchema = new Schema<IItem>({
   itemQuantity: { type: Number, required: true },
   itemUnit: { type: String, required: true },
   itemPrice: { type: Number, required: true },
+  ownedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 const ItemModel: Model<IItem> = mongoose.model<IItem>("Item", ItemSchema);

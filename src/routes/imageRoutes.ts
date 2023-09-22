@@ -10,7 +10,6 @@ import {
 
 const imageRouter = express.Router();
 
-// Update the routes to your routes
 imageRouter.post("/image", createImage);
 imageRouter.get("/images", getAllImages);
 imageRouter.get("/image/:id", getImageById);

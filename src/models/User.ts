@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, Model, Types } from "mongoose";
+import mongoose, { Document, Schema, Model } from "mongoose";
 import bcrypt from "bcrypt";
 
 interface IUser extends Document {
@@ -21,24 +21,61 @@ interface IUser extends Document {
 
 const UserSchema = new Schema<IUser>({
   company: { type: String, required: true, unique: true },
-  email: { type: String, required: true, unique: true },
+  email: {
+    type: String,
+    required: true,
+    trim: true,
+    unique: true,
+    lowercase: true,
+    validate: {
+      validator: function (value: string) {
+        return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value);
+      },
+      message: "Invalid email address",
+    },
+  },
   password: {
     type: String,
     required: true,
-    /* validate: {
-      validator: function (value: String) {
-        // Define your password validation criteria here
-        return value.length >= 8 && value.length <= 15; // Example: Password should be between 8 and 15 characters
+    validate: {
+      validator: function (value: string) {
+        const passwordRegex =
+          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?!\s).{8,16}$/;
+        return passwordRegex.test(value);
       },
-      message: (props) => "Password must be between 8 and 15 characters!",
-    }, */
+      message:
+        "Password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, no whitespace, and be between 8 and 16 characters long.",
+    },
   },
   plan: { type: String, required: true },
   billing: {
     company: { type: String, required: true },
-    orgNumber: { type: String, required: true, unique: true },
+    orgNumber: {
+      type: String,
+      required: true,
+      unique: true,
+      validate: {
+        validator: function (value: string) {
+          const orgNumberRegex = /^\d{10}$/;
+          return orgNumberRegex.test(value);
+        },
+        message: "Organization number must be a 10-digit number.",
+      },
+    },
     adress: { type: String, required: true },
-    email: { type: String, required: true },
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
+      lowercase: true,
+      validate: {
+        validator: function (value: string) {
+          return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value);
+        },
+        message: "Invalid email address",
+      },
+    },
     phone: { type: Number, required: true },
   },
   departments: [
@@ -49,7 +86,6 @@ const UserSchema = new Schema<IUser>({
   ],
 });
 
-// Hash the password before saving
 UserSchema.pre("save", async function (next) {
   const user = this;
   if (!user.isModified("password")) return next();

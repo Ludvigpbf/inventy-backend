@@ -10,7 +10,6 @@ import {
 
 const userRouter = express.Router();
 
-// Update the routes to your routes
 userRouter.post("/user", createUser);
 userRouter.get("/users", getAllUsers);
 userRouter.get("/user/:id", getUserById);

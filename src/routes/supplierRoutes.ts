@@ -10,7 +10,6 @@ import {
 
 const supplierRouter = express.Router();
 
-// Update the routes to your routes
 supplierRouter.post("/supplier", createSupplier);
 supplierRouter.get("/suppliers", getAllSuppliers);
 supplierRouter.get("/supplier/:id", getSupplierById);
